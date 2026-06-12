@@ -30,6 +30,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   static const Color bgColor = Color(0xFF0F172A);
+  static const Color cardColor = Color(0xFF1E293B);
   static const Color purple = Color(0xFF7C3AED);
   static const Color cyan = Color(0xFF06B6D4);
   static const Color secondaryText = Color(0xFF94A3B8);
@@ -126,6 +127,76 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 25),
+
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  // Follow button
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        decoration: BoxDecoration(
+                          color: purple,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.add, color: Colors.white, size: 18),
+                              SizedBox(width: 6),
+                              Text(
+                                "Follow",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(width: 14),
+
+                  // Message button
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      decoration: BoxDecoration(
+                        color: cardColor,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: cyan, width: 1.5),
+                      ),
+                      child: const Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.chat_bubble_outline,
+                                color: cyan, size: 18),
+                            SizedBox(width: 6),
+                            Text(
+                              "Message",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
           ],
         ),
       ),
