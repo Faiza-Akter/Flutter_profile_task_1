@@ -35,6 +35,9 @@ class _ProfilePageState extends State<ProfilePage> {
   static const Color cyan = Color(0xFF06B6D4);
   static const Color secondaryText = Color(0xFF94A3B8);
 
+
+  bool isFollowing = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +112,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
             const SizedBox(height: 70),
 
-
             const Text(
               "SM Faiza Akter",
               style: TextStyle(
@@ -128,7 +130,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 25),
 
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -136,22 +137,33 @@ class _ProfilePageState extends State<ProfilePage> {
                   // Follow button
                   Expanded(
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+                          isFollowing = !isFollowing;
+                        });
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         decoration: BoxDecoration(
-                          color: purple,
+                          color: isFollowing ? cardColor : purple,
                           borderRadius: BorderRadius.circular(14),
+                          border: isFollowing
+                              ? Border.all(color: cyan, width: 1.5)
+                              : null,
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.add, color: Colors.white, size: 18),
-                              SizedBox(width: 6),
+                              Icon(
+                                isFollowing ? Icons.check : Icons.add,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                              const SizedBox(width: 6),
                               Text(
-                                "Follow",
-                                style: TextStyle(
+                                isFollowing ? "Following" : "Follow",
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
