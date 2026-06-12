@@ -35,7 +35,6 @@ class _ProfilePageState extends State<ProfilePage> {
   static const Color cyan = Color(0xFF06B6D4);
   static const Color secondaryText = Color(0xFF94A3B8);
 
-
   bool isFollowing = false;
 
   @override
@@ -112,6 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
             const SizedBox(height: 70),
 
+
             const Text(
               "SM Faiza Akter",
               style: TextStyle(
@@ -129,6 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 25),
+
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -209,9 +210,66 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 30),
+
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 18),
+                decoration: BoxDecoration(
+                  color: cardColor,
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(child: _buildStatItem("7", "Projects")),
+                    _buildVerticalDivider(),
+                    Expanded(child: _buildStatItem("1.2K", "Followers")),
+                    _buildVerticalDivider(),
+                    Expanded(child: _buildStatItem("3 yrs", "Experience")),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
           ],
         ),
       ),
+    );
+  }
+
+
+  Widget _buildStatItem(String value, String label) {
+    return Center(
+      child: Column(
+        children: [
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: const TextStyle(
+              color: secondaryText,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+  Widget _buildVerticalDivider() {
+    return Container(
+      height: 35,
+      width: 1,
+      color: secondaryText.withValues(alpha: 0.3),
     );
   }
 }
