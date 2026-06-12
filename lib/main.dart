@@ -135,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  // Follow button
+
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
@@ -232,6 +232,37 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 30),
+
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Profile Details",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  _buildDetailRow(Icons.email_outlined, "Email",
+                      "faizaakter2004@gmail.com"),
+                  const SizedBox(height: 12),
+                  _buildDetailRow(
+                      Icons.badge_outlined, "Student ID", "232-134-022"),
+                  const SizedBox(height: 12),
+                  _buildDetailRow(Icons.school_outlined, "Department",
+                      "Software Engineering"),
+                  const SizedBox(height: 12),
+                  _buildDetailRow(
+                      Icons.groups_outlined, "Batch", "5th"),
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
           ],
         ),
       ),
@@ -269,7 +300,54 @@ class _ProfilePageState extends State<ProfilePage> {
     return Container(
       height: 35,
       width: 1,
-      color: secondaryText.withValues(alpha: 0.3),
+      color: secondaryText.withOpacity(0.3),
+    );
+  }
+
+
+  Widget _buildDetailRow(IconData icon, String label, String value) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: purple.withOpacity(0.15),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, color: cyan, size: 20),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: const TextStyle(
+                    color: secondaryText,
+                    fontSize: 12,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  value,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
