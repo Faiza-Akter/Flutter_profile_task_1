@@ -49,21 +49,58 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Gradient header background
-            Container(
-              height: 180,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [purple, cyan],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+            Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.center,
+              children: [
+                // Gradient header background
+                Container(
+                  height: 180,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [purple, cyan],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
                 ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
+
+                Positioned(
+                  bottom: -55,
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: bgColor,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 3),
+                    ),
+                    child: Container(
+                      width: 110,
+                      height: 110,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          colors: [purple, cyan],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.person,
+                          size: 60,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             const SizedBox(height: 70),
           ],
