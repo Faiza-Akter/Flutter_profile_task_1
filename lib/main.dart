@@ -32,6 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
   static const Color bgColor = Color(0xFF0F172A);
   static const Color purple = Color(0xFF7C3AED);
   static const Color cyan = Color(0xFF06B6D4);
+  static const Color secondaryText = Color(0xFF94A3B8);
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+
             Stack(
               clipBehavior: Clip.none,
               alignment: Alignment.center,
@@ -69,6 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
+
 
                 Positioned(
                   bottom: -55,
@@ -102,7 +105,27 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
+
             const SizedBox(height: 70),
+
+
+            const Text(
+              "SM Faiza Akter",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 6),
+            const Text(
+              "Flutter Developer | UI/UX Enthusiast",
+              style: TextStyle(
+                color: secondaryText,
+                fontSize: 14,
+              ),
+            ),
+            const SizedBox(height: 25),
           ],
         ),
       ),
