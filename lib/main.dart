@@ -46,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: const Center(
         child: Text(
-          "Profile Screen Coming Soon",
+          "Profile Screen",
           style: TextStyle(color: Colors.white),
         ),
       ),
