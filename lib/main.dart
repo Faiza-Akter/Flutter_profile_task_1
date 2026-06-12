@@ -30,6 +30,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   static const Color bgColor = Color(0xFF0F172A);
+  static const Color purple = Color(0xFF7C3AED);
+  static const Color cyan = Color(0xFF06B6D4);
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +46,27 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          "Profile Screen",
-          style: TextStyle(color: Colors.white),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Gradient header background
+            Container(
+              height: 180,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [purple, cyan],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                ),
+              ),
+            ),
+            const SizedBox(height: 70),
+          ],
         ),
       ),
     );
