@@ -12,10 +12,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Profile Screen',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFF0F172A),
-        fontFamily: 'Roboto',
-      ),
       home: const ProfilePage(),
     );
   }
@@ -29,37 +25,65 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  static const Color bgColor = Color(0xFF0F172A);
-  static const Color cardColor = Color(0xFF1E293B);
+  bool isDarkMode = true;
+
+
+  static const Color darkBg = Color(0xFF0F172A);
+  static const Color darkCard = Color(0xFF1E293B);
+  static const Color darkSecondaryText = Color(0xFF94A3B8);
+
+
+  static const Color lightBg = Color(0xFFF0FDFF);
+  static const Color lightCard = Color(0xFFFFFFFF);
+  static const Color lightSecondaryText = Color(0xFF64748B);
+
+
   static const Color purple = Color(0xFF7C3AED);
   static const Color cyan = Color(0xFF06B6D4);
-  static const Color secondaryText = Color(0xFF94A3B8);
 
   bool isFollowing = false;
 
   @override
   Widget build(BuildContext context) {
+
+    final Color bgColor = isDarkMode ? darkBg : lightBg;
+    final Color cardColor = isDarkMode ? darkCard : lightCard;
+    final Color primaryText = isDarkMode ? Colors.white : const Color(0xFF0F172A);
+    final Color secondaryText = isDarkMode ? darkSecondaryText : lightSecondaryText;
+
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: bgColor,
         elevation: 0,
-        // Left icon - menu
-        leading: const Icon(Icons.menu, color: Colors.white),
-        title: const Text(
+        leading: Icon(Icons.menu, color: primaryText),
+        title: Text(
           "Profile",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: primaryText, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        // Right icons - search and more options
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.search, color: Colors.white),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isDarkMode = !isDarkMode;
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(
+                isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                color: isDarkMode ? Colors.white : purple,
+              ),
+            ),
           ),
           Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: Icon(Icons.more_horiz, color: Colors.white),
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.search, color: primaryText),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Icon(Icons.more_horiz, color: primaryText),
           ),
         ],
       ),
@@ -88,7 +112,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
 
-
                 Positioned(
                   bottom: -55,
                   child: Container(
@@ -96,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     decoration: BoxDecoration(
                       color: bgColor,
                       shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 3),
+                      border: Border.all(color: bgColor, width: 3),
                     ),
                     child: Container(
                       width: 110,
@@ -124,17 +147,16 @@ class _ProfilePageState extends State<ProfilePage> {
 
             const SizedBox(height: 70),
 
-
-            const Text(
+            Text(
               "SM Faiza Akter",
               style: TextStyle(
-                color: Colors.white,
+                color: primaryText,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 6),
-            const Text(
+            Text(
               "Flutter Developer | UI/UX Enthusiast",
               style: TextStyle(
                 color: secondaryText,
@@ -142,7 +164,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 25),
-
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -171,14 +192,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             children: [
                               Icon(
                                 isFollowing ? Icons.check : Icons.add,
-                                color: Colors.white,
+                                color: isFollowing ? primaryText : Colors.white,
                                 size: 18,
                               ),
                               const SizedBox(width: 6),
                               Text(
                                 isFollowing ? "Following" : "Follow",
-                                style: const TextStyle(
-                                  color: Colors.white,
+                                style: TextStyle(
+                                  color: isFollowing ? primaryText : Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -200,17 +221,17 @@ class _ProfilePageState extends State<ProfilePage> {
                         borderRadius: BorderRadius.circular(14),
                         border: Border.all(color: cyan, width: 1.5),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.chat_bubble_outline,
+                            const Icon(Icons.chat_bubble_outline,
                                 color: cyan, size: 18),
-                            SizedBox(width: 6),
+                            const SizedBox(width: 6),
                             Text(
                               "Message",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: primaryText,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -234,58 +255,56 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 child: Row(
                   children: [
-                    Expanded(child: _buildStatItem("7", "Projects")),
-                    _buildVerticalDivider(),
-                    Expanded(child: _buildStatItem("1.2K", "Followers")),
-                    _buildVerticalDivider(),
-                    Expanded(child: _buildStatItem("3 yrs", "Experience")),
+                    Expanded(child: _buildStatItem("7", "Projects", primaryText, secondaryText)),
+                    _buildVerticalDivider(secondaryText),
+                    Expanded(child: _buildStatItem("1.2K", "Followers", primaryText, secondaryText)),
+                    _buildVerticalDivider(secondaryText),
+                    Expanded(child: _buildStatItem("3 yrs", "Experience", primaryText, secondaryText)),
                   ],
                 ),
               ),
             ),
             const SizedBox(height: 30),
 
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Profile Details",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: primaryText,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 15),
                   _buildDetailRow(Icons.email_outlined, "Email",
-                      "faizaakter2004@gmail.com"),
+                      "faizaakter2004@gmail.com", cardColor, primaryText, secondaryText),
                   const SizedBox(height: 12),
                   _buildDetailRow(
-                      Icons.badge_outlined, "Student ID", "232-134-022"),
+                      Icons.badge_outlined, "Student ID", "232-134-022", cardColor, primaryText, secondaryText),
                   const SizedBox(height: 12),
                   _buildDetailRow(Icons.school_outlined, "Department",
-                      "Software Engineering"),
+                      "Software Engineering", cardColor, primaryText, secondaryText),
                   const SizedBox(height: 12),
                   _buildDetailRow(
-                      Icons.groups_outlined, "Batch", "5th"),
+                      Icons.groups_outlined, "Batch", "5th", cardColor, primaryText, secondaryText),
                 ],
               ),
             ),
             const SizedBox(height: 30),
-
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "About Me",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: primaryText,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -298,7 +317,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: cardColor,
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    child: const Text(
+                    child: Text(
                       "Passionate Flutter developer who loves building "
                           "beautiful, performant mobile applications. Currently "
                           "exploring UI/UX design and clean architecture while "
@@ -320,15 +339,14 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-
-  Widget _buildStatItem(String value, String label) {
+  Widget _buildStatItem(String value, String label, Color primaryText, Color secondaryText) {
     return Center(
       child: Column(
         children: [
           Text(
             value,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: primaryText,
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -336,7 +354,7 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(height: 4),
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               color: secondaryText,
               fontSize: 12,
             ),
@@ -346,8 +364,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-
-  Widget _buildVerticalDivider() {
+  Widget _buildVerticalDivider(Color secondaryText) {
     return Container(
       height: 35,
       width: 1,
@@ -355,13 +372,13 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-
-  Widget _buildDetailRow(IconData icon, String label, String value) {
+  Widget _buildDetailRow(IconData icon, String label, String value, Color cardColor, Color primaryText, Color secondaryText) {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: secondaryText.withOpacity(0.15)),
       ),
       child: Row(
         children: [
@@ -380,7 +397,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Text(
                   label,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: secondaryText,
                     fontSize: 12,
                   ),
@@ -388,8 +405,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 3),
                 Text(
                   value,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: primaryText,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
