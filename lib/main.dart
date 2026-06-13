@@ -44,11 +44,24 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         backgroundColor: bgColor,
         elevation: 0,
+        // Left icon - menu
+        leading: const Icon(Icons.menu, color: Colors.white),
         title: const Text(
           "Profile",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        // Right icons - search and more options
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.search, color: Colors.white),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 16.0),
+            child: Icon(Icons.more_horiz, color: Colors.white),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -135,7 +148,7 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-
+                  // Follow button
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
@@ -211,7 +224,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 30),
 
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
@@ -263,6 +275,45 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 30),
+
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "About Me",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: cardColor,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const Text(
+                      "Passionate Flutter developer who loves building "
+                          "beautiful, performant mobile applications. Currently "
+                          "exploring UI/UX design and clean architecture while "
+                          "completing my degree in Software Engineering.",
+                      style: TextStyle(
+                        color: secondaryText,
+                        fontSize: 14,
+                        height: 1.5,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 40),
           ],
         ),
       ),
